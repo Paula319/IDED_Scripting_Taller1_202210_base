@@ -13,13 +13,63 @@ namespace TestProject1
             Prime
         }
 
+        //-----1-----
+
         internal static Stack<int> GetNextGreaterValue(Stack<int> sourceStack)
         {
-            Stack<int> result = null;
+            //Stack<int> result = null;
 
-            return result;
+            int[] arreglo_SourceStack = sourceStack.ToArray();
+            Stack<int> copia_Stack;
+            copia_Stack = new Stack<int>();
+
+            for (int i = arreglo_SourceStack.Length - 1; i >= 0; i--) 
+            {
+                copia_Stack.Push(arreglo_SourceStack[i]);                
+            }
+       
+            List<int> salidas;     
+            List<int> pila_Final;
+            Stack<int> result;
+
+            salidas = new List<int>();         
+            pila_Final = new List<int>(); //Al revés
+            result = new Stack<int>();
+
+            for (int i= copia_Stack.Count -1; i >= 0; i--)
+            {
+                int elemento = copia_Stack.Pop(); //Guardar primer elemento 
+                salidas.Add(elemento); 
+
+                int elemento_Mayor = elemento;
+
+                for (int j = 0; j < salidas.Count; j++)
+                
+                {
+                    if (salidas[j] > elemento_Mayor) elemento_Mayor = salidas[j];
+                }
+
+                if (elemento_Mayor == elemento)
+                {
+                    pila_Final.Add(-1);
+                }
+
+                else
+                {
+                    pila_Final.Add(elemento_Mayor);
+                }
+            }
+            
+
+            for (int i = pila_Final.Count - 1; i >= 0; i--)
+            {
+                result.Push(pila_Final[i]);
+            }
+                return result;
         }
 
+
+        //-----2-----
         internal static Dictionary<int, EValueType> FillDictionaryFromSource(int[] sourceArr)
         {
             Dictionary<int, EValueType> result = null;
@@ -39,6 +89,7 @@ namespace TestProject1
             return result;
         }
 
+        //-----3-----
         internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
         {
             Queue<Ticket>[] result = null;
@@ -51,6 +102,6 @@ namespace TestProject1
             bool result = false;
 
             return result;
-        }        
+        }
     }
 }
